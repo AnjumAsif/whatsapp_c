@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "510668427219",
+    "project_id": "whatsapp-aysa",
+    "storage_bucket": "whatsapp-aysa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:510668427219:android:24ad79ccd3c603eeb6e926",
+        "android_client_info": {
+          "package_name": "com.aysa.whatsapp.whatsapp_clone"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTKDN76TBuboPwxKPzOLDvNSTtNbucqeM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
