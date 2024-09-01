@@ -1,18 +1,21 @@
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:whatsapp_clone/colors.dart';
+import 'package:whatsapp_clone/commons/utils/utils.dart';
 import 'package:whatsapp_clone/commons/widgets/custom_button.dart';
+import 'package:whatsapp_clone/features/auth/controller/auth_controller.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends ConsumerStatefulWidget {
   static const routeName = '/loginscreen';
 
   const LoginScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  ConsumerState<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends ConsumerState<LoginScreen> {
   final phoneController = TextEditingController();
   Country? _country;
 
@@ -30,6 +33,17 @@ class _LoginScreenState extends State<LoginScreen> {
             _country = country;
           });
         });
+  }
+
+  sendPhoneNumber() {
+    String phone = phoneController.text.trim();
+    if (_country != null && phone.isNotEmpty) {
+      ref
+          .read(authControllerProvider)
+          .signInWithPhoneNumber(context, '+${_country!.phoneCode}$phone');
+    } else {
+      showSnackBar(context, 'please enter mobile number');
+    }
   }
 
   @override
@@ -74,7 +88,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       width: size.width * .7,
                       child: TextField(
                         controller: phoneController,
-                        decoration: InputDecoration(hintText: 'phone number'),
+                        decoration: const InputDecoration(hintText: 'phone number'),
                       ),
                     )
                   ],
@@ -85,7 +99,7 @@ class _LoginScreenState extends State<LoginScreen> {
               height: 50,
               child: CustomButton(
                 text: 'NEXT',
-                onPressed: () {},
+                onPressed: sendPhoneNumber,
               ),
             ),
           ],
